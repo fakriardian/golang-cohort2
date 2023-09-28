@@ -1,2 +1,7 @@
-# golang-cohort2
-this repo for class golang-cohort2
+# Mini Class 3
+
+How to run:
+
+```bash
+go run . Fitri
+```
