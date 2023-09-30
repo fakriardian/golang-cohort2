@@ -7,7 +7,8 @@ import (
 )
 
 type Show interface {
-	Print() []string
+	Print(wg *sync.WaitGroup, i int)
+	PrinLock(wg *sync.WaitGroup, i int, mtx *sync.Mutex)
 }
 
 type Data struct {
@@ -26,29 +27,29 @@ func (d Data) PrinLock(wg *sync.WaitGroup, i int, mtx *sync.Mutex) {
 }
 
 func main() {
-	coba := Data{
+	coba := Show(Data{
 		DataSlice: []string{"coba1", "coba2", "coba3"},
-	}
+	})
 
-	bisa := Data{
+	bisa := Show(Data{
 		DataSlice: []string{"bisa1", "bisa2", "bisa3"},
-	}
+	})
 
 	var wg sync.WaitGroup
 	var mutex sync.Mutex
 
 	wg.Add(1)
-	go withoutMutex(&coba, &bisa, &wg)
+	go withoutMutex(coba, bisa, &wg)
 	wg.Wait()
 
 	fmt.Println(strings.Repeat("=", 50))
 
 	wg.Add(1)
-	go withMutex(&coba, &bisa, &wg, &mutex)
+	go withMutex(coba, bisa, &wg, &mutex)
 	wg.Wait()
 }
 
-func withoutMutex(coba *Data, bisa *Data, wg *sync.WaitGroup) {
+func withoutMutex(coba, bisa Show, wg *sync.WaitGroup) {
 	defer wg.Done()
 	fmt.Println("without mutex:")
 	for i := 1; i <= 4; i++ {
@@ -59,7 +60,7 @@ func withoutMutex(coba *Data, bisa *Data, wg *sync.WaitGroup) {
 
 }
 
-func withMutex(coba, bisa *Data, wg *sync.WaitGroup, mtx *sync.Mutex) {
+func withMutex(coba, bisa Show, wg *sync.WaitGroup, mtx *sync.Mutex) {
 	defer wg.Done()
 	fmt.Println("with mutex:")
 	for i := 1; i <= 4; i++ {
