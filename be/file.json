@@ -1,0 +1,42 @@
+[
+  {
+    "ID": 1,
+    "name": "Irfan",
+    "email": "fakriardian@gmail.com",
+    "alamat": "Bogor",
+    "pekerjaan": "Buruh Ketik",
+    "alasan": "alasan"
+  },
+  {
+    "ID": 2,
+    "name": "Fakri",
+    "email": "kudanilterbang@yopmail.com",
+    "alamat": "Bogor",
+    "pekerjaan": "Budak Engineer",
+    "alasan": "alasan"
+  },
+  {
+    "ID": 3,
+    "name": "Ardian",
+    "email": "example@yopmail.com",
+    "alamat": "Bogor",
+    "pekerjaan": "Mahasiswa",
+    "alasan": "alasan"
+  },
+  {
+    "ID": 4,
+    "name": "Gon",
+    "email": "gon@yopmail.com",
+    "alamat": "Namek",
+    "pekerjaan": "Hunter",
+    "alasan": "Nyari Bapaknya"
+  },
+  {
+    "ID": 5,
+    "name": "Kilua",
+    "email": "kulia@yopmail.com",
+    "alamat": "Di Gunung",
+    "pekerjaan": "Hunter",
+    "alasan": "Kabur Dari Rumah"
+  }
+]
