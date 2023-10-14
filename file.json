@@ -1,0 +1,37 @@
+[
+  {
+    "ID": 1,
+    "name": "Irfan",
+    "alamat": "Bogor",
+    "pekerjaan": "Buruh Ketik",
+    "alasan": "alasan"
+  },
+  {
+    "ID": 2,
+    "name": "Fakri",
+    "alamat": "Bogor",
+    "pekerjaan": "Budak Engineer",
+    "alasan": "alasan"
+  },
+  {
+    "ID": 3,
+    "name": "Ardian",
+    "alamat": "Bogor",
+    "pekerjaan": "Mahasiswa",
+    "alasan": "alasan"
+  },
+  {
+    "ID": 4,
+    "name": "Gon",
+    "alamat": "Namek",
+    "pekerjaan": "Hunter",
+    "alasan": "Nyari Bapaknya"
+  },
+  {
+    "ID": 5,
+    "name": "Kilua",
+    "alamat": "Di Gunung",
+    "pekerjaan": "Hunter",
+    "alasan": "Kabur Dari Rumah"
+  }
+]
