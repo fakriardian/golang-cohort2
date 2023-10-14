@@ -5,16 +5,14 @@ import (
 )
 
 func main() {
-	n := 30
-	for i := 1; i <= n; i++ {
-		if i%3 == 0 && i%5 == 0 {
-			fmt.Println("FizzBuzz")
-		} else if i%3 == 0 {
-			fmt.Println("Fizz")
-		} else if i%5 == 0 {
-			fmt.Println("Buzz")
-		} else {
-			fmt.Println(i)
-		}
+	kalimat := "selamat malam"
+
+	count := make(map[string]int)
+
+	for _, value := range kalimat {
+		count[string(value)]++
+		fmt.Printf("%c \n", value)
 	}
+
+	fmt.Printf("%v", count)
 }
