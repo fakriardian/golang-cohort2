@@ -2,18 +2,13 @@
 
 this repo for class golang-cohort2
 
-## Installation & Running Tests
+### List of mini class
 
-Frontend:
+<hr />
 
-```bash
-cd fe && cp .env-example .env
-npm install && npm start
-```
-
-Backend:
-
-```bash
-cd be && cp .env-example .env
-go mod tidy && go run .
-```
+- [Mini Class 1](https://github.com/fakriardian/golang-cohort2/tree/main/mini-class-1/)
+- [Mini Class 2](https://github.com/fakriardian/golang-cohort2/tree/main/mini-class-2/)
+- [Mini Class 3](https://github.com/fakriardian/golang-cohort2/tree/main/mini-class-3/)
+- [Mini Class 4](https://github.com/fakriardian/golang-cohort2/tree/main/mini-class-4/)
+- [Mini Class 5](https://github.com/fakriardian/golang-cohort2/tree/main/mini-class-5/)
+- [Mini Class 6](https://github.com/fakriardian/golang-cohort2/tree/main/mini-class-6/)
