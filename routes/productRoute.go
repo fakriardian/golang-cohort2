@@ -17,6 +17,8 @@ func InitProductRoutes(deps *config.Deps, router *gin.Engine) {
 
 	productRouter := router.Group("/products")
 	{
+		InitVariantRoutes(deps.DB, productRouter.Group("/variants"))
+
 		productRouter.GET("", productControllers.RetrieveProducts)
 		productRouter.GET("/:id", productControllers.RetrieveProduct)
 
@@ -24,7 +26,5 @@ func InitProductRoutes(deps *config.Deps, router *gin.Engine) {
 		productRouter.POST("", productControllers.CreateProduct)
 		productRouter.PUT("/:id", middlewares.ProductAuthorization(deps.DB), productControllers.UpdateProduct)
 		productRouter.DELETE("/:id", middlewares.ProductAuthorization(deps.DB), productControllers.DeleteProduct)
-
-		InitVariantRoutes(deps.DB, productRouter.Group("/variants"))
 	}
 }
