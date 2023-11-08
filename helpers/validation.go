@@ -1,6 +1,7 @@
 package helpers
 
 import (
+	"encoding/json"
 	"errors"
 	"final-challenge/dtos"
 	"fmt"
@@ -44,7 +45,15 @@ func formatedErrBind(ctx *gin.Context, err error) {
 			Message: "error",
 		})
 		return
+	} else if syntaxErr, ok := err.(*json.SyntaxError); ok {
+		ctx.JSON(http.StatusBadRequest, dtos.Response{
+			Error:   syntaxErr.Error(),
+			Status:  http.StatusBadRequest,
+			Message: "error",
+		})
+		return
 	}
+
 }
 
 func BindRequest(ctx *gin.Context, req interface{}) error {

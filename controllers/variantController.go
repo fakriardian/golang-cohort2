@@ -9,18 +9,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type controller struct {
-	service services.ProductService
+type variantController struct {
+	service services.VariantService
 }
 
-func RegisterProductController(service services.ProductService) *controller {
-	return &controller{
+func RegisterVariantController(service services.VariantService) *variantController {
+	return &variantController{
 		service: service,
 	}
 }
 
-func (ctrl *controller) CreateProduct(ctx *gin.Context) {
-	var req dtos.ProductCreateRequest
+func (ctrl *variantController) CreateVariant(ctx *gin.Context) {
+	var req dtos.VariantCreateRequest
 
 	adminID := ctx.Request.Header.Get("AdminID")
 	req.AdminID = adminID
@@ -29,7 +29,7 @@ func (ctrl *controller) CreateProduct(ctx *gin.Context) {
 		return
 	}
 
-	createProductResult, err := ctrl.service.CreateProductService(req)
+	createVariantResult, err := ctrl.service.CreateVariantService(req)
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, dtos.Response{
@@ -40,19 +40,19 @@ func (ctrl *controller) CreateProduct(ctx *gin.Context) {
 		return
 	}
 
-	data := []interface{}{createProductResult}
+	data := []interface{}{createVariantResult}
 	response := dtos.Response{
 		Data:    data,
 		Status:  http.StatusOK,
-		Message: "success created product data",
+		Message: "success created variant data",
 	}
 
 	ctx.JSON(http.StatusOK, response)
 }
 
-func (ctrl *controller) UpdateProduct(ctx *gin.Context) {
-	var req dtos.ProductUpdateRequest
-	var uri dtos.ProductIDUri
+func (ctrl *variantController) UpdateVariant(ctx *gin.Context) {
+	var req dtos.VariantUpdateRequest
+	var uri dtos.VariantIDUri
 
 	if err := ctx.ShouldBindUri(&uri); err != nil {
 		ctx.AbortWithStatusJSON(http.StatusNotFound, dtos.Response{
@@ -70,7 +70,7 @@ func (ctrl *controller) UpdateProduct(ctx *gin.Context) {
 		return
 	}
 
-	existingProduct, err := ctrl.service.FindProductServicebyId(uri.ID)
+	existingVariant, err := ctrl.service.FindVariantServicebyId(uri.ID)
 	if err != nil {
 		ctx.JSON(http.StatusNotFound, dtos.Response{
 			Error:   err.Error(),
@@ -80,7 +80,7 @@ func (ctrl *controller) UpdateProduct(ctx *gin.Context) {
 		return
 	}
 
-	updateProductResult, err := ctrl.service.UpdateProductService(existingProduct.ID, req)
+	updateVariantResult, err := ctrl.service.UpdateVariantService(existingVariant.ID, req)
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, dtos.Response{
@@ -91,18 +91,18 @@ func (ctrl *controller) UpdateProduct(ctx *gin.Context) {
 		return
 	}
 
-	data := []interface{}{updateProductResult}
+	data := []interface{}{updateVariantResult}
 	response := dtos.Response{
 		Data:    data,
 		Status:  http.StatusOK,
-		Message: "success updated product data",
+		Message: "success updated variant data",
 	}
 
 	ctx.JSON(http.StatusOK, response)
 }
 
-func (ctrl *controller) DeleteProduct(ctx *gin.Context) {
-	var uri dtos.ProductIDUri
+func (ctrl *variantController) DeleteVariant(ctx *gin.Context) {
+	var uri dtos.VariantIDUri
 
 	if err := ctx.ShouldBindUri(&uri); err != nil {
 		ctx.AbortWithStatusJSON(http.StatusNotFound, dtos.Response{
@@ -113,7 +113,7 @@ func (ctrl *controller) DeleteProduct(ctx *gin.Context) {
 		return
 	}
 
-	existingProduct, err := ctrl.service.FindProductServicebyId(uri.ID)
+	existingVariant, err := ctrl.service.FindVariantServicebyId(uri.ID)
 	if err != nil {
 		ctx.JSON(http.StatusNotFound, dtos.Response{
 			Error:   err.Error(),
@@ -123,7 +123,7 @@ func (ctrl *controller) DeleteProduct(ctx *gin.Context) {
 		return
 	}
 
-	statusCode := ctrl.service.DeleteProductService(existingProduct.ID)
+	statusCode := ctrl.service.DeleteVariantService(existingVariant.ID)
 
 	if statusCode != http.StatusOK {
 		ctx.JSON(http.StatusInternalServerError, dtos.Response{
@@ -142,14 +142,14 @@ func (ctrl *controller) DeleteProduct(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
-func (ctrl *controller) RetrieveProducts(ctx *gin.Context) {
+func (ctrl *variantController) RetrieveVariants(ctx *gin.Context) {
 	var filter dtos.FilterRequest
 
 	if err := helpers.BindRequest(ctx, &filter); err != nil {
 		return
 	}
 
-	retrieveProduct, total, page, size, err := ctrl.service.PaginationProductService(filter)
+	retrieveVariant, total, page, size, err := ctrl.service.PaginationVariantService(filter)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, dtos.Response{
 			Error:   err.Error(),
@@ -159,24 +159,24 @@ func (ctrl *controller) RetrieveProducts(ctx *gin.Context) {
 		return
 	}
 
-	if retrieveProduct == nil {
-		retrieveProduct = []interface{}{}
+	if retrieveVariant == nil {
+		retrieveVariant = []interface{}{}
 	}
 
 	response := dtos.PaginationResponse{
-		Data:     retrieveProduct,
+		Data:     retrieveVariant,
 		Total:    total,
 		Page:     page,
 		PageSize: size,
 		Status:   http.StatusOK,
-		Message:  "success get product datas",
+		Message:  "success get variant datas",
 	}
 
 	ctx.JSON(http.StatusOK, response)
 }
 
-func (ctrl *controller) RetrieveProduct(ctx *gin.Context) {
-	var uri dtos.ProductIDUri
+func (ctrl *variantController) RetrieveVariant(ctx *gin.Context) {
+	var uri dtos.VariantIDUri
 
 	if err := ctx.ShouldBindUri(&uri); err != nil {
 		ctx.AbortWithStatusJSON(http.StatusNotFound, dtos.Response{
@@ -187,7 +187,7 @@ func (ctrl *controller) RetrieveProduct(ctx *gin.Context) {
 		return
 	}
 
-	existingProduct, err := ctrl.service.FindProductServicebyId(uri.ID)
+	existingVariant, err := ctrl.service.FindVariantServicebyId(uri.ID)
 	if err != nil {
 		ctx.JSON(http.StatusNotFound, dtos.Response{
 			Error:   err.Error(),
@@ -197,11 +197,11 @@ func (ctrl *controller) RetrieveProduct(ctx *gin.Context) {
 		return
 	}
 
-	data := []interface{}{existingProduct}
+	data := []interface{}{existingVariant}
 	response := dtos.Response{
 		Data:    data,
 		Status:  http.StatusOK,
-		Message: "success updated product data",
+		Message: "success updated variant data",
 	}
 
 	ctx.JSON(http.StatusOK, response)

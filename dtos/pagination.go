@@ -3,10 +3,13 @@ package dtos
 import "strconv"
 
 type PaginationResponse struct {
-	Total    int           `json:"total"`
-	Page     int           `json:"page"`
-	PageSize int           `json:"pageSize"`
-	Data     []interface{} `json:"data,omitempty"`
+	Data     []interface{} `json:"data"`
+	Error    string        `json:"error,omitempty"`
+	Total    int64         `json:"total,omitempty"`
+	Page     int64         `json:"page,omitempty"`
+	PageSize int64         `json:"pageSize,omitempty"`
+	Status   int64         `json:"status"`
+	Message  string        `json:"message"`
 }
 
 type FilterRequest struct {

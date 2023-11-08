@@ -93,11 +93,6 @@ func (r *repository) UpdateProduct(productID uuid.UUID, input *models.Product) (
 		return nil, errors.New("error when Updated Data")
 	}
 
-	if err := tx.Where("product_id = ?", productID).Delete(&models.Variant{}).Error; err != nil {
-		tx.Rollback()
-		return nil, errors.New("error when Inserted Data")
-	}
-
 	if err := tx.Model(input).Where("id = ?", productID).Updates(input).Error; err != nil {
 		tx.Rollback()
 		return nil, errors.New("error when Inserted Data")

@@ -25,7 +25,7 @@ func main() {
 
 	gin.SetMode(os.Getenv("ENV"))
 
-	routes.InitAuthRoutes(deps.DB, router)
+	routes.InitAuthRoutes(deps, router)
 	routes.InitProductRoutes(deps, router)
 
 	log.Fatal(router.Run(":" + os.Getenv("PORT")))

@@ -3,6 +3,7 @@ package middlewares
 import (
 	"final-challenge/dtos"
 	"final-challenge/helpers"
+	"final-challenge/libs"
 	"net/http"
 	"strings"
 
@@ -11,7 +12,7 @@ import (
 	"golang.org/x/text/language"
 )
 
-func Authentication() gin.HandlerFunc {
+func Authentication(cld *libs.CloudinaryService) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		headerToken := ctx.Request.Header.Get("Authorization")
 		bearer := strings.HasPrefix(headerToken, "Bearer")
@@ -26,7 +27,9 @@ func Authentication() gin.HandlerFunc {
 		}
 
 		stringToken := strings.Split(headerToken, " ")[1]
-		verifyToken, err := helpers.VerifyToken(stringToken)
+
+		getPublicKey, _ := cld.Getkey("public")
+		verifyToken, err := helpers.VerifyToken(stringToken, getPublicKey)
 
 		if err != nil {
 			ctx.AbortWithStatusJSON(http.StatusUnauthorized, dtos.Response{

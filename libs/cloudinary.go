@@ -4,9 +4,12 @@ import (
 	"bytes"
 	"context"
 	"errors"
+	"fmt"
 	"io"
 	"log"
 	"mime/multipart"
+	"net/http"
+	"os"
 	"path"
 	"path/filepath"
 	"strings"
@@ -57,7 +60,7 @@ func (service *CloudinaryService) UploadFile(fileHeader *multipart.FileHeader, f
 	}
 
 	// Remove ext
-	realFileName := RemoveExtension(fileName)
+	realFileName := removeExtension(fileName)
 
 	// Upload file
 	uploadParam, err := service.cld.Upload.Upload(ctx, fileReader, uploader.UploadParams{
@@ -69,6 +72,32 @@ func (service *CloudinaryService) UploadFile(fileHeader *multipart.FileHeader, f
 	}
 
 	return uploadParam.SecureURL, nil
+}
+
+func (service *CloudinaryService) Getkey(key string) ([]byte, error) {
+	var url string
+	if key == "private" {
+		url = os.Getenv("PRIVATE_KEY_URL")
+	} else {
+		url = os.Getenv("PUBLIC_KEY_URL")
+	}
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("HTTP request failed with status: %d", resp.StatusCode)
+	}
+
+	bodyBytes, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	return bodyBytes, nil
 }
 
 func convertFile(fileHeader *multipart.FileHeader) (*bytes.Reader, error) {
@@ -89,7 +118,7 @@ func convertFile(fileHeader *multipart.FileHeader) (*bytes.Reader, error) {
 	return fileReader, nil
 }
 
-func RemoveExtension(filename string) string {
+func removeExtension(filename string) string {
 	return path.Base(filename[:len(filename)-len(path.Ext(filename))])
 }
 

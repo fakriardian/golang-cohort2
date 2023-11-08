@@ -1,5 +1,21 @@
 package dtos
 
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
+
+type User struct {
+	ID        uuid.UUID  `json:"id,omitempty"`
+	Name      string     `json:"name"`
+	Email     string     `json:"email"`
+	Password  string     `json:"-"`
+	Products  []Product  `json:"-"`
+	CreatedAt *time.Time `json:"createdAt"`
+	UpdatedAt *time.Time `json:"updatedAt"`
+}
+
 type UserRegister struct {
 	Name     string `json:"name" form:"name" binding:"required"`
 	Email    string `json:"email" binding:"required,email" form:"email"`

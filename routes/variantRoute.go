@@ -1,22 +1,27 @@
 package routes
 
 import (
+	"final-challenge/config"
+	"final-challenge/controllers"
+	"final-challenge/middlewares"
+	"final-challenge/repository"
+	"final-challenge/services"
+
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 )
 
-func InitVariantRoutes(db *gorm.DB, variantRouter *gin.RouterGroup) {
-	// userRepository := repository.RegisterUserRepository(db)
-	// userServices := services.RegisterUserService(userRepository)
-	// authServices := services.RegisterAuthService(userRepository)
-	// authControllers := controllers.RegisterControllerAuth(authServices, userServices)
+func InitVariantRoutes(deps *config.Deps, variantRouter *gin.RouterGroup) {
+	variantRepository := repository.RegisterVariantRepository(deps.DB)
+	variantServices := services.RegisterVariantService(variantRepository)
+	variantControllers := controllers.RegisterVariantController(variantServices)
 
-	// variantRouter := router.Group("/products")
 	{
-		variantRouter.GET("")
-		variantRouter.GET("/:id")
-		variantRouter.POST("")
-		variantRouter.PUT("/:id")
-		variantRouter.DELETE("/:id")
+		variantRouter.GET("", variantControllers.RetrieveVariants)
+		variantRouter.GET("/:id", variantControllers.RetrieveVariant)
+
+		variantRouter.Use(middlewares.Authentication(deps.STRG))
+		variantRouter.POST("", middlewares.VariantCreateAuthorization(deps.DB), variantControllers.CreateVariant)
+		variantRouter.PUT("/:id", middlewares.VariantAuthorization(deps.DB), variantControllers.UpdateVariant)
+		variantRouter.DELETE("/:id", middlewares.VariantAuthorization(deps.DB), variantControllers.DeleteVariant)
 	}
 }

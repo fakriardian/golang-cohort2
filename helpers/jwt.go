@@ -12,12 +12,7 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-func loadPrivateKey() (*rsa.PrivateKey, error) {
-	privateKeyBytes, err := os.ReadFile("./private")
-	if err != nil {
-		return nil, fmt.Errorf("error reading private key: %s", err)
-	}
-
+func loadPrivateKey(privateKeyBytes []byte) (*rsa.PrivateKey, error) {
 	privateKey, err := jwt.ParseRSAPrivateKeyFromPEM(privateKeyBytes)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing private key: %s", err)
@@ -26,12 +21,7 @@ func loadPrivateKey() (*rsa.PrivateKey, error) {
 	return privateKey, nil
 }
 
-func loadPublicKey() (*rsa.PublicKey, error) {
-	publicKeyBytes, err := os.ReadFile("./public")
-	if err != nil {
-		return nil, fmt.Errorf("error reading public key: %s", err)
-	}
-
+func loadPublicKey(publicKeyBytes []byte) (*rsa.PublicKey, error) {
 	publicKey, err := jwt.ParseRSAPublicKeyFromPEM(publicKeyBytes)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing public key: %s", err)
@@ -40,8 +30,8 @@ func loadPublicKey() (*rsa.PublicKey, error) {
 	return publicKey, nil
 }
 
-func GenerateAccessToken(userID string) (string, error) {
-	privateKey, _ := loadPrivateKey()
+func GenerateAccessToken(userID string, privateKey []byte) (string, error) {
+	privateKeyPem, _ := loadPrivateKey(privateKey)
 	exp, _ := strconv.Atoi(os.Getenv("AUTH_EXP"))
 	expiredTime := time.Duration(exp) * time.Minute
 
@@ -54,17 +44,17 @@ func GenerateAccessToken(userID string) (string, error) {
 
 	accessJwt := jwt.NewWithClaims(jwt.GetSigningMethod("RS256"), accessClaim)
 
-	return accessJwt.SignedString(privateKey)
+	return accessJwt.SignedString(privateKeyPem)
 }
 
-func VerifyToken(tokenString string) (string, error) {
-	publicKey, _ := loadPublicKey()
+func VerifyToken(tokenString string, publicKey []byte) (string, error) {
+	publicKeyPem, _ := loadPublicKey(publicKey)
 
 	token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodRSA); !ok {
 			return nil, errors.New("Unauthorized")
 		}
-		return publicKey, nil
+		return publicKeyPem, nil
 	})
 
 	claims, ok := token.Claims.(jwt.MapClaims)
