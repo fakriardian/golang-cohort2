@@ -16,8 +16,8 @@ type ProductRepository interface {
 	CreateProduct(input *models.Product) (*models.Product, error)
 	UpdateProduct(productID uuid.UUID, input *models.Product) (*models.Product, error)
 	DeleteProduct(productID uuid.UUID) int
-	FindAll(filter dtos.Filter) (*[]models.Product, error)
-	FindbyId(id uuid.UUID) (*models.Product, error)
+	FindAll(filter dtos.Filter) ([]models.Product, error)
+	FindbyId(id uuid.UUID) (models.Product, error)
 	Count(filter dtos.Filter) (*int64, error)
 }
 
@@ -48,7 +48,7 @@ func (r *repository) CreateProduct(input *models.Product) (*models.Product, erro
 	return input, nil
 }
 
-func (r *repository) FindAll(filter dtos.Filter) (*[]models.Product, error) {
+func (r *repository) FindAll(filter dtos.Filter) ([]models.Product, error) {
 	var product []models.Product
 
 	tx := r.db
@@ -66,10 +66,10 @@ func (r *repository) FindAll(filter dtos.Filter) (*[]models.Product, error) {
 		return nil, fmt.Errorf("error finding product: %w", tx.Error)
 	}
 
-	return &product, nil
+	return product, nil
 }
 
-func (r *repository) FindbyId(ID uuid.UUID) (*models.Product, error) {
+func (r *repository) FindbyId(ID uuid.UUID) (models.Product, error) {
 	var product models.Product
 
 	tx := r.db.Preload(clause.Associations).Where(models.Product{
@@ -78,12 +78,12 @@ func (r *repository) FindbyId(ID uuid.UUID) (*models.Product, error) {
 
 	if tx.Error != nil {
 		if errors.Is(tx.Error, gorm.ErrRecordNotFound) {
-			return nil, errors.New("product data is not found")
+			return product, errors.New("product data is not found")
 		}
-		return nil, fmt.Errorf("error finding product: %w", tx.Error)
+		return product, fmt.Errorf("error finding product: %w", tx.Error)
 	}
 
-	return &product, nil
+	return product, nil
 }
 
 func (r *repository) UpdateProduct(productID uuid.UUID, input *models.Product) (*models.Product, error) {
@@ -95,12 +95,17 @@ func (r *repository) UpdateProduct(productID uuid.UUID, input *models.Product) (
 
 	if err := tx.Model(input).Where("id = ?", productID).Updates(input).Error; err != nil {
 		tx.Rollback()
-		return nil, errors.New("error when Inserted Data")
+		return nil, errors.New("error when Updated Data")
 	}
 
 	tx.Commit()
 
-	return input, nil
+	var product models.Product
+	if err := r.db.First(&product, productID).Error; err != nil {
+		return nil, errors.New("error when Updated Data")
+	}
+
+	return &product, nil
 }
 
 func (r *repository) DeleteProduct(productID uuid.UUID) int {

@@ -16,8 +16,8 @@ type VariantRepository interface {
 	CreateVariant(input *models.Variant) (*models.Variant, error)
 	UpdateVariant(variantID uuid.UUID, input *models.Variant) (*models.Variant, error)
 	DeleteVariant(variantID uuid.UUID) int
-	FindAll(filter dtos.Filter) (*[]models.Variant, error)
-	FindbyId(id uuid.UUID) (*models.Variant, error)
+	FindAll(filter dtos.Filter) ([]models.Variant, error)
+	FindbyId(id uuid.UUID) (models.Variant, error)
 	Count(filter dtos.Filter) (*int64, error)
 }
 
@@ -48,7 +48,7 @@ func (r *varinatRepository) CreateVariant(input *models.Variant) (*models.Varian
 	return input, nil
 }
 
-func (r *varinatRepository) FindAll(filter dtos.Filter) (*[]models.Variant, error) {
+func (r *varinatRepository) FindAll(filter dtos.Filter) ([]models.Variant, error) {
 	var variant []models.Variant
 
 	tx := r.db
@@ -66,10 +66,10 @@ func (r *varinatRepository) FindAll(filter dtos.Filter) (*[]models.Variant, erro
 		return nil, fmt.Errorf("error finding variant: %w", tx.Error)
 	}
 
-	return &variant, nil
+	return variant, nil
 }
 
-func (r *varinatRepository) FindbyId(ID uuid.UUID) (*models.Variant, error) {
+func (r *varinatRepository) FindbyId(ID uuid.UUID) (models.Variant, error) {
 	var variant models.Variant
 
 	tx := r.db.Preload(clause.Associations).Where(models.Variant{
@@ -78,12 +78,12 @@ func (r *varinatRepository) FindbyId(ID uuid.UUID) (*models.Variant, error) {
 
 	if tx.Error != nil {
 		if errors.Is(tx.Error, gorm.ErrRecordNotFound) {
-			return nil, errors.New("variant data is not found")
+			return variant, errors.New("variant data is not found")
 		}
-		return nil, fmt.Errorf("error finding variant: %w", tx.Error)
+		return variant, fmt.Errorf("error finding variant: %w", tx.Error)
 	}
 
-	return &variant, nil
+	return variant, nil
 }
 
 func (r *varinatRepository) UpdateVariant(variantID uuid.UUID, input *models.Variant) (*models.Variant, error) {
@@ -95,12 +95,17 @@ func (r *varinatRepository) UpdateVariant(variantID uuid.UUID, input *models.Var
 
 	if err := tx.Model(input).Where("id = ?", variantID).Updates(input).Error; err != nil {
 		tx.Rollback()
-		return nil, errors.New("error when Inserted Data")
+		return nil, errors.New("error when Updated Data")
 	}
 
 	tx.Commit()
 
-	return input, nil
+	var variant models.Variant
+	if err := r.db.First(&variant, variantID).Error; err != nil {
+		return nil, errors.New("error when Updated Data")
+	}
+
+	return &variant, nil
 }
 
 func (r *varinatRepository) DeleteVariant(variantID uuid.UUID) int {

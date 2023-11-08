@@ -169,7 +169,7 @@ func (ctrl *controller) RetrieveProducts(ctx *gin.Context) {
 		Page:     page,
 		PageSize: size,
 		Status:   http.StatusOK,
-		Message:  "success get product datas",
+		Message:  "success retrieve products data",
 	}
 
 	ctx.JSON(http.StatusOK, response)
@@ -187,7 +187,7 @@ func (ctrl *controller) RetrieveProduct(ctx *gin.Context) {
 		return
 	}
 
-	existingProduct, err := ctrl.service.FindProductServicebyId(uri.ID)
+	data, err := ctrl.service.RetrieveProductService(uri.ID)
 	if err != nil {
 		ctx.JSON(http.StatusNotFound, dtos.Response{
 			Error:   err.Error(),
@@ -197,11 +197,10 @@ func (ctrl *controller) RetrieveProduct(ctx *gin.Context) {
 		return
 	}
 
-	data := []interface{}{existingProduct}
 	response := dtos.Response{
 		Data:    data,
 		Status:  http.StatusOK,
-		Message: "success updated product data",
+		Message: "success retrieve product data",
 	}
 
 	ctx.JSON(http.StatusOK, response)

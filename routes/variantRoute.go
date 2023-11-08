@@ -12,7 +12,8 @@ import (
 
 func InitVariantRoutes(deps *config.Deps, variantRouter *gin.RouterGroup) {
 	variantRepository := repository.RegisterVariantRepository(deps.DB)
-	variantServices := services.RegisterVariantService(variantRepository)
+	productRepository := repository.RegisterProductRepository(deps.DB)
+	variantServices := services.RegisterVariantService(variantRepository, productRepository)
 	variantControllers := controllers.RegisterVariantController(variantServices)
 
 	{

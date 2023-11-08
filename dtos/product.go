@@ -3,16 +3,13 @@ package dtos
 import (
 	"mime/multipart"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 type Product struct {
-	ID        uuid.UUID  `json:"id,omitempty"`
+	ID        string     `json:"id,omitempty"`
 	Name      string     `json:"name"`
 	ImageUrl  string     `json:"imageUrl"`
-	UserID    uuid.UUID  `json:"-"`
-	User      User       `json:"admin"`
+	UserID    string     `json:"adminId"`
 	Variants  []Variant  `json:"variants"`
 	CreatedAt *time.Time `json:"createdAt"`
 	UpdatedAt *time.Time `json:"updatedAt"`
@@ -34,11 +31,11 @@ type ProductIDUri struct {
 	ID string `uri:"id" binding:"required,uuid"`
 }
 
-type CreateProductResponse struct {
+type ProductListResponse struct {
 	ID        string     `json:"id,omitempty"`
 	Name      string     `json:"name"`
 	ImageUrl  string     `json:"imageUrl"`
-	UserID    string     `json:"adminId"`
+	UserID    User       `json:"adminId"`
 	Variants  []Variant  `json:"variants"`
 	CreatedAt *time.Time `json:"createdAt"`
 	UpdatedAt *time.Time `json:"updatedAt"`

@@ -29,3 +29,19 @@ type VariantUpdateRequest struct {
 type VariantIDUri struct {
 	ID string `uri:"id" binding:"required,uuid"`
 }
+
+type VariantListResponse struct {
+	ID       string `json:"id,omitempty"`
+	Name     string `json:"name"`
+	Quantity int    `json:"quantity"`
+	Product  struct {
+		ID        string     `json:"id,omitempty"`
+		Name      string     `json:"name"`
+		ImageUrl  string     `json:"imageUrl"`
+		UserID    string     `json:"adminId"`
+		CreatedAt *time.Time `json:"createdAt"`
+		UpdatedAt *time.Time `json:"updatedAt"`
+	} `json:"product"`
+	CreatedAt *time.Time `json:"createdAt"`
+	UpdatedAt *time.Time `json:"updatedAt"`
+}

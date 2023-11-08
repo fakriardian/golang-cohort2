@@ -14,6 +14,7 @@ type UserService interface {
 	CreateUserService(req dtos.UserRegister) (*models.User, error)
 	FindUserbyIdService(id string) (*models.User, error)
 	IsExistingUserService(email string) (*models.User, error)
+	UserToDto(user *models.User) *dtos.User
 }
 
 type userService struct {
@@ -57,4 +58,14 @@ func (service *userService) IsExistingUserService(email string) (*models.User, e
 	encryption := helpers.NewEncryption()
 	decrypted := encryption.Encrypt(email)
 	return service.repository.IsExistUser(decrypted)
+}
+
+func (service *userService) UserToDto(user *models.User) *dtos.User {
+	return &dtos.User{
+		ID:        user.ID.String(),
+		Name:      user.Name,
+		Email:     user.Email,
+		CreatedAt: user.CreatedAt,
+		UpdatedAt: user.UpdatedAt,
+	}
 }

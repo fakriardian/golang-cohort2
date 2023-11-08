@@ -11,8 +11,14 @@ import (
 )
 
 func InitProductRoutes(deps *config.Deps, router *gin.Engine) {
+	userRepository := repository.RegisterUserRepository(deps.DB)
 	productRepository := repository.RegisterProductRepository(deps.DB)
-	productServices := services.RegisterProductService(productRepository, deps.STRG)
+	variantRepository := repository.RegisterVariantRepository(deps.DB)
+
+	userServices := services.RegisterUserService(userRepository)
+	variantServices := services.RegisterVariantService(variantRepository, productRepository)
+	productServices := services.RegisterProductService(productRepository, variantServices, userServices, deps.STRG)
+
 	productControllers := controllers.RegisterProductController(productServices)
 
 	productRouter := router.Group("/products")

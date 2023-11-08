@@ -169,7 +169,7 @@ func (ctrl *variantController) RetrieveVariants(ctx *gin.Context) {
 		Page:     page,
 		PageSize: size,
 		Status:   http.StatusOK,
-		Message:  "success get variant datas",
+		Message:  "success retrieve variants data",
 	}
 
 	ctx.JSON(http.StatusOK, response)
@@ -187,7 +187,7 @@ func (ctrl *variantController) RetrieveVariant(ctx *gin.Context) {
 		return
 	}
 
-	existingVariant, err := ctrl.service.FindVariantServicebyId(uri.ID)
+	data, err := ctrl.service.RetrieveVariantService(uri.ID)
 	if err != nil {
 		ctx.JSON(http.StatusNotFound, dtos.Response{
 			Error:   err.Error(),
@@ -197,11 +197,10 @@ func (ctrl *variantController) RetrieveVariant(ctx *gin.Context) {
 		return
 	}
 
-	data := []interface{}{existingVariant}
 	response := dtos.Response{
 		Data:    data,
 		Status:  http.StatusOK,
-		Message: "success updated variant data",
+		Message: "success retrieve variant data",
 	}
 
 	ctx.JSON(http.StatusOK, response)
