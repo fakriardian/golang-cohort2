@@ -54,7 +54,7 @@ func (r *varinatRepository) FindAll(filter dtos.Filter) ([]models.Variant, error
 	tx := r.db
 
 	if filter.Search != "" {
-		tx = tx.Where("name LIKE ?", filter.Search)
+		tx = tx.Where("name LIKE ?", "%"+filter.Search+"%")
 	}
 
 	tx = tx.Preload(clause.Associations).Limit(filter.Size).Offset((filter.Page - 1) * filter.Size).Find(&variant)

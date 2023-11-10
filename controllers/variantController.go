@@ -4,6 +4,7 @@ import (
 	"final-challenge/dtos"
 	"final-challenge/helpers"
 	"final-challenge/services"
+	"math"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -164,12 +165,13 @@ func (ctrl *variantController) RetrieveVariants(ctx *gin.Context) {
 	}
 
 	response := dtos.PaginationResponse{
-		Data:     retrieveVariant,
-		Total:    total,
-		Page:     page,
-		PageSize: size,
-		Status:   http.StatusOK,
-		Message:  "success retrieve variants data",
+		Data:      retrieveVariant,
+		Total:     total,
+		Page:      page,
+		Size:      size,
+		TotalPage: int64(math.Ceil(float64(total) / float64(size))),
+		Status:    http.StatusOK,
+		Message:   "success retrieve variants data",
 	}
 
 	ctx.JSON(http.StatusOK, response)
