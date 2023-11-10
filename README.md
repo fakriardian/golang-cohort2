@@ -39,3 +39,10 @@ this repo for class golang-cohort2
 ## Documentation
 
 [Postman Collection](https://github.com/fakriardian/golang-cohort2/blob/final-project/final_project.postman_collection.json)
+
+_note_:
+
+```
+{{URL}} //for localhost endpoint
+{{RAILWAY}} //for railway endpoint
+```
