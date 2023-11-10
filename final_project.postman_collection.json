@@ -1,0 +1,1016 @@
+{
+  "info": {
+    "_postman_id": "7dca8a2d-4711-4c1d-beca-05b762ae983c",
+    "name": "Final Project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "7208524"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "fitri@mail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "name",
+                  "value": "Fitri Ayu",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "testing",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{URL}}/auth/register",
+              "host": ["{{URL}}"],
+              "path": ["auth", "register"]
+            }
+          },
+          "response": [
+            {
+              "name": "Register",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "email",
+                      "value": "fitri@mail.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Fitri Ayu",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "testing",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{URL}}/auth/register",
+                  "host": ["{{URL}}"],
+                  "path": ["auth", "register"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 09 Nov 2023 07:39:14 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "234"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"id\": \"617a51c4-1e58-4801-b6b1-62a92057b45f\",\n            \"name\": \"Fitri Ayu\",\n            \"email\": \"fitri@mail.com\",\n            \"createdAt\": \"2023-11-09T14:39:13.986+07:00\",\n            \"updatedAt\": \"2023-11-09T14:39:13.986+07:00\"\n        }\n    ],\n    \"status\": 200,\n    \"message\": \"success created user\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();\r",
+                  "pm.collectionVariables.set(\"AUTH\", jsonData.accessToken);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "fitri@mail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "testing",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{URL}}/auth/login",
+              "host": ["{{URL}}"],
+              "path": ["auth", "login"]
+            }
+          },
+          "response": [
+            {
+              "name": "Login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "email",
+                      "value": "fitri@mail.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "testing",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{URL}}/auth/login",
+                  "host": ["{{URL}}"],
+                  "path": ["auth", "login"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 09 Nov 2023 07:44:50 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "871"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"accessToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTk1MTk0OTAsInN1YiI6IjYxN2E1MWM0LTFlNTgtNDgwMS1iNmIxLTYyYTkyMDU3YjQ1ZiJ9.OL-a3KskbiXJ1a-g2vPPJS80zEnDEmvd5XT_jPXJKTEiN8-Rf7-Bew0AmxGq4MNyRn_TNwIzoDENBq3S1tp_vOi02CN6hCTStCBkxsj-Lg8UWK99bSFcHZUnlWItv8kL0GsZDOWyEkHUh7LpcN_WU5VQN0KdbYfMjJyCzZfmWA2SYuadtQp4FyFD_ZZMjoQcr9DIIa1bltxtNyX0hnvCYqdRFVrqXNXcMBrTsZ_iqR9QU9ab1hNoxn7L42Tkn0i1NyoHqq2eAAHB1qX86uKlqo1Qcj1ucxmysXhGm1ysgZgCGps4reIss9ICVg7l8ThNGtIKrX-D0J9Kllq3LriWLtKroY9MLfTEh4TlVR-izmQto-uyaeL8CNI_LJiIRAqaDJtvT8s8Np19MGcfPOvTgbvyR8nUGJ92rQ5P7nTHFLfPQf6XPCjSd_CQccM-wcEXoaJLhiD94xnfbcE2KJIj-JWyi-YwFRWU8LShMuxHuheTUUlLhLtbbEZ5_zPyedSoXaOH7r3CKUQSaJmmfmAtevOuiRbiXYwVL8sxX_92eno_FfUznxtMTU2z0kYWGy7LFjpbi3Kxtky9dZ6M5Sbp2rhMgVlYhZ3b1UaoFoE1leQksHhxOmQHEDdhiT89bPu-NhHH1BFq5sDhtYMqZ00Z1CkKLBo9qTUXB8Gy47l98Ms\",\n    \"status\": 200,\n    \"message\": \"success generate token\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Variants",
+          "item": [
+            {
+              "name": "Get All",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{URL}}/products/variants?page=1&size=2&search=mac",
+                  "host": ["{{URL}}"],
+                  "path": ["products", "variants"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "2"
+                    },
+                    {
+                      "key": "search",
+                      "value": "mac"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Get All",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{URL}}/products/variants?page=1&size=2&search=mac",
+                      "host": ["{{URL}}"],
+                      "path": ["products", "variants"],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "size",
+                          "value": "2"
+                        },
+                        {
+                          "key": "search",
+                          "value": "mac"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Thu, 09 Nov 2023 08:44:24 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "1060"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"data\": [\n        {\n            \"id\": \"29251ad3-46be-4628-bd6a-bd5f52e24067\",\n            \"name\": \"Macbook Air M1\",\n            \"quantity\": 100,\n            \"product\": {\n                \"id\": \"73fbd47e-95ac-4ef3-8b3c-a82acbbf113a\",\n                \"name\": \"Product 3\",\n                \"imageUrl\": \"https://res.cloudinary.com/dqjmsjig8/image/upload/v1699517343/cohort/gudang.jpg\",\n                \"adminId\": \"617a51c4-1e58-4801-b6b1-62a92057b45f\",\n                \"createdAt\": \"2023-11-09T15:09:25.03+07:00\",\n                \"updatedAt\": \"2023-11-09T15:09:25.03+07:00\"\n            },\n            \"createdAt\": \"2023-11-09T15:33:17.183+07:00\",\n            \"updatedAt\": \"2023-11-09T15:33:17.183+07:00\"\n        },\n        {\n            \"id\": \"44a2e7d8-e1d2-4af4-bbf7-9e7ac6f22408\",\n            \"name\": \"Macbook Air M2\",\n            \"quantity\": 100,\n            \"product\": {\n                \"id\": \"73fbd47e-95ac-4ef3-8b3c-a82acbbf113a\",\n                \"name\": \"Product 3\",\n                \"imageUrl\": \"https://res.cloudinary.com/dqjmsjig8/image/upload/v1699517343/cohort/gudang.jpg\",\n                \"adminId\": \"617a51c4-1e58-4801-b6b1-62a92057b45f\",\n                \"createdAt\": \"2023-11-09T15:09:25.03+07:00\",\n                \"updatedAt\": \"2023-11-09T15:09:25.03+07:00\"\n            },\n            \"createdAt\": \"2023-11-09T15:33:20.588+07:00\",\n            \"updatedAt\": \"2023-11-09T15:33:20.588+07:00\"\n        }\n    ],\n    \"page\": 1,\n    \"size\": 2,\n    \"total\": 3,\n    \"totalPage\": 2,\n    \"status\": 200,\n    \"message\": \"success retrieve variants data\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get by UUID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{URL}}/products/variants/:uuid",
+                  "host": ["{{URL}}"],
+                  "path": ["products", "variants", ":uuid"],
+                  "variable": [
+                    {
+                      "key": "uuid",
+                      "value": "29251ad3-46be-4628-bd6a-bd5f52e24067",
+                      "description": "uuid of variant"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Get by UUID",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{URL}}/products/variants/:uuid",
+                      "host": ["{{URL}}"],
+                      "path": ["products", "variants", ":uuid"],
+                      "variable": [
+                        {
+                          "key": "uuid",
+                          "value": "29251ad3-46be-4628-bd6a-bd5f52e24067",
+                          "description": "uuid of variant"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Thu, 09 Nov 2023 08:45:03 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "541"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"data\": [\n        {\n            \"id\": \"29251ad3-46be-4628-bd6a-bd5f52e24067\",\n            \"name\": \"Macbook Air M1\",\n            \"quantity\": 100,\n            \"product\": {\n                \"id\": \"73fbd47e-95ac-4ef3-8b3c-a82acbbf113a\",\n                \"name\": \"Product 3\",\n                \"imageUrl\": \"https://res.cloudinary.com/dqjmsjig8/image/upload/v1699517343/cohort/gudang.jpg\",\n                \"adminId\": \"617a51c4-1e58-4801-b6b1-62a92057b45f\",\n                \"createdAt\": \"2023-11-09T15:09:25.03+07:00\",\n                \"updatedAt\": \"2023-11-09T15:09:25.03+07:00\"\n            },\n            \"createdAt\": \"2023-11-09T15:33:17.183+07:00\",\n            \"updatedAt\": \"2023-11-09T15:33:17.183+07:00\"\n        }\n    ],\n    \"status\": 200,\n    \"message\": \"success retrieve variant data\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{AUTH}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Macbook Air M3",
+                      "type": "text"
+                    },
+                    {
+                      "key": "quantity",
+                      "value": "1",
+                      "type": "text"
+                    },
+                    {
+                      "key": "productId",
+                      "value": "73fbd47e-95ac-4ef3-8b3c-a82acbbf113a",
+                      "description": "uuid of product",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{URL}}/products/variants",
+                  "host": ["{{URL}}"],
+                  "path": ["products", "variants"]
+                }
+              },
+              "response": [
+                {
+                  "name": "Create",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "name",
+                          "value": "Please Please Me",
+                          "type": "text"
+                        },
+                        {
+                          "key": "quantity",
+                          "value": "1",
+                          "type": "text"
+                        },
+                        {
+                          "key": "productId",
+                          "value": "24f5615c-5624-4045-be40-1290e09f23ec",
+                          "description": "uuid of product",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{URL}}/products/variants",
+                      "host": ["{{URL}}"],
+                      "path": ["products", "variants"]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Thu, 09 Nov 2023 08:32:42 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "288"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"data\": [\n        {\n            \"id\": \"c54c7a27-6c05-4dfd-a206-a88fd45aaf28\",\n            \"name\": \"Please Please Me\",\n            \"quantity\": 1,\n            \"productId\": \"24f5615c-5624-4045-be40-1290e09f23ec\",\n            \"createdAt\": \"2023-11-09T15:32:42.778+07:00\",\n            \"updatedAt\": \"2023-11-09T15:32:42.778+07:00\"\n        }\n    ],\n    \"status\": 200,\n    \"message\": \"success created variant data\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{AUTH}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Macbook Air M3 updated soon",
+                      "description": "string",
+                      "type": "text"
+                    },
+                    {
+                      "key": "quantity",
+                      "value": "8",
+                      "description": "integer",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{URL}}/products/variants/:uuid",
+                  "host": ["{{URL}}"],
+                  "path": ["products", "variants", ":uuid"],
+                  "variable": [
+                    {
+                      "key": "uuid",
+                      "value": "d4636f52-4f09-4051-bf8b-4df6dc46c553",
+                      "description": "uuid of variant"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Update",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "name",
+                          "value": "Macbook Air M3 updated soon",
+                          "description": "string",
+                          "type": "text"
+                        },
+                        {
+                          "key": "quantity",
+                          "value": "8",
+                          "description": "integer",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{URL}}/products/variants/:uuid",
+                      "host": ["{{URL}}"],
+                      "path": ["products", "variants", ":uuid"],
+                      "variable": [
+                        {
+                          "key": "uuid",
+                          "value": "d4636f52-4f09-4051-bf8b-4df6dc46c553",
+                          "description": "uuid of variant"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Thu, 09 Nov 2023 08:33:58 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "299"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"data\": [\n        {\n            \"id\": \"d4636f52-4f09-4051-bf8b-4df6dc46c553\",\n            \"name\": \"Macbook Air M3 updated soon\",\n            \"quantity\": 8,\n            \"productId\": \"73fbd47e-95ac-4ef3-8b3c-a82acbbf113a\",\n            \"createdAt\": \"2023-11-09T15:33:28.338+07:00\",\n            \"updatedAt\": \"2023-11-09T15:33:58.912+07:00\"\n        }\n    ],\n    \"status\": 200,\n    \"message\": \"success updated variant data\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{AUTH}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{URL}}/products/variants/:uuid",
+                  "host": ["{{URL}}"],
+                  "path": ["products", "variants", ":uuid"],
+                  "variable": [
+                    {
+                      "key": "uuid",
+                      "value": "522233f6-0086-43f8-b925-950befb61857",
+                      "description": "uuid of variant"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Delete",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{URL}}/products/variants/:uuid",
+                      "host": ["{{URL}}"],
+                      "path": ["products", "variants", ":uuid"],
+                      "variable": [
+                        {
+                          "key": "uuid",
+                          "value": "522233f6-0086-43f8-b925-950befb61857",
+                          "description": "uuid of variant"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Thu, 09 Nov 2023 08:34:23 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "47"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"success deleted data\"\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL}}/products?page=1&size=1&search=3",
+              "host": ["{{URL}}"],
+              "path": ["products"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "1"
+                },
+                {
+                  "key": "search",
+                  "value": "3",
+                  "description": "search by name product"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get All",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{URL}}/products?page=1&size=1&search=3",
+                  "host": ["{{URL}}"],
+                  "path": ["products"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "1"
+                    },
+                    {
+                      "key": "search",
+                      "value": "3",
+                      "description": "search by name product"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 09 Nov 2023 08:29:47 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "556"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"id\": \"73fbd47e-95ac-4ef3-8b3c-a82acbbf113a\",\n            \"name\": \"Product 3\",\n            \"imageUrl\": \"https://res.cloudinary.com/dqjmsjig8/image/upload/v1699517343/cohort/gudang.jpg\",\n            \"adminId\": {\n                \"id\": \"617a51c4-1e58-4801-b6b1-62a92057b45f\",\n                \"name\": \"Fitri Ayu\",\n                \"email\": \"fitri@mail.com\",\n                \"createdAt\": \"2023-11-09T14:39:13.986+07:00\",\n                \"updatedAt\": \"2023-11-09T14:39:13.986+07:00\"\n            },\n            \"variants\": null,\n            \"createdAt\": \"2023-11-09T15:09:25.03+07:00\",\n            \"updatedAt\": \"2023-11-09T15:09:25.03+07:00\"\n        }\n    ],\n    \"page\": 1,\n    \"size\": 1,\n    \"total\": 1,\n    \"totalPage\": 1,\n    \"status\": 200,\n    \"message\": \"success retrieve products data\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get by UUID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL}}/products/:id",
+              "host": ["{{URL}}"],
+              "path": ["products", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "24f5615c-5624-4045-be40-1290e09f23ec"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get by UUID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{URL}}/products/:id",
+                  "host": ["{{URL}}"],
+                  "path": ["products", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "24f5615c-5624-4045-be40-1290e09f23ec"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 09 Nov 2023 08:45:40 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1405"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"id\": \"24f5615c-5624-4045-be40-1290e09f23ec\",\n            \"name\": \"The Beatles\",\n            \"imageUrl\": \"https://res.cloudinary.com/dqjmsjig8/image/upload/v1699517463/cohort/nowandthen.jpg\",\n            \"adminId\": {\n                \"id\": \"617a51c4-1e58-4801-b6b1-62a92057b45f\",\n                \"name\": \"Fitri Ayu\",\n                \"email\": \"fitri@mail.com\",\n                \"createdAt\": \"2023-11-09T14:39:13.986+07:00\",\n                \"updatedAt\": \"2023-11-09T14:39:13.986+07:00\"\n            },\n            \"variants\": [\n                {\n                    \"id\": \"14db4f68-f076-4937-a4eb-cb8fbcc7025e\",\n                    \"name\": \"Help!\",\n                    \"quantity\": 3,\n                    \"productId\": \"24f5615c-5624-4045-be40-1290e09f23ec\",\n                    \"createdAt\": \"2023-11-09T15:35:16.132+07:00\",\n                    \"updatedAt\": \"2023-11-09T15:35:16.132+07:00\"\n                },\n                {\n                    \"id\": \"a04f147f-d618-4ef4-b522-38625759de1a\",\n                    \"name\": \"A Hard Day's Night\",\n                    \"quantity\": 2,\n                    \"productId\": \"24f5615c-5624-4045-be40-1290e09f23ec\",\n                    \"createdAt\": \"2023-11-09T15:35:01.689+07:00\",\n                    \"updatedAt\": \"2023-11-09T15:35:01.689+07:00\"\n                },\n                {\n                    \"id\": \"ac9af245-669a-4dea-a84e-e2d565d43f04\",\n                    \"name\": \"Yellow Submarine\",\n                    \"quantity\": 1,\n                    \"productId\": \"24f5615c-5624-4045-be40-1290e09f23ec\",\n                    \"createdAt\": \"2023-11-09T15:43:00.158+07:00\",\n                    \"updatedAt\": \"2023-11-09T15:43:00.158+07:00\"\n                },\n                {\n                    \"id\": \"c54c7a27-6c05-4dfd-a206-a88fd45aaf28\",\n                    \"name\": \"Please Please Me\",\n                    \"quantity\": 1,\n                    \"productId\": \"24f5615c-5624-4045-be40-1290e09f23ec\",\n                    \"createdAt\": \"2023-11-09T15:32:42.778+07:00\",\n                    \"updatedAt\": \"2023-11-09T15:32:42.778+07:00\"\n                }\n            ],\n            \"createdAt\": \"2023-11-09T15:11:04.376+07:00\",\n            \"updatedAt\": \"2023-11-09T15:11:04.376+07:00\"\n        }\n    ],\n    \"status\": 200,\n    \"message\": \"success retrieve product data\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Tes Product",
+                  "type": "text"
+                },
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{URL}}/products",
+              "host": ["{{URL}}"],
+              "path": ["products"]
+            }
+          },
+          "response": [
+            {
+              "name": "Create",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Tes Product",
+                      "type": "text"
+                    },
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": "/C:/Users/irfan/Downloads/kudanilterbang.jpg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{URL}}/products",
+                  "host": ["{{URL}}"],
+                  "path": ["products"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 09 Nov 2023 08:08:01 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "385"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"id\": \"17c1ef7a-a3cd-4ee0-9c69-68bee12b5fe5\",\n            \"name\": \"Tes Product\",\n            \"imageUrl\": \"https://res.cloudinary.com/dqjmsjig8/image/upload/v1699517280/cohort/kudanilterbang.jpg\",\n            \"adminId\": \"617a51c4-1e58-4801-b6b1-62a92057b45f\",\n            \"variants\": null,\n            \"createdAt\": \"2023-11-09T15:08:01.304+07:00\",\n            \"updatedAt\": \"2023-11-09T15:08:01.304+07:00\"\n        }\n    ],\n    \"status\": 200,\n    \"message\": \"success created product data\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Tes Nama Update",
+                  "type": "text"
+                },
+                {
+                  "key": "file",
+                  "value": "",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{URL}}/products/:id",
+              "host": ["{{URL}}"],
+              "path": ["products", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "17c1ef7a-a3cd-4ee0-9c69-68bee12b5fe5"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Tes Nama Update",
+                      "type": "text"
+                    },
+                    {
+                      "key": "file",
+                      "value": "",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{URL}}/products/:id",
+                  "host": ["{{URL}}"],
+                  "path": ["products", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "17c1ef7a-a3cd-4ee0-9c69-68bee12b5fe5"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 09 Nov 2023 08:11:30 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "389"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"id\": \"17c1ef7a-a3cd-4ee0-9c69-68bee12b5fe5\",\n            \"name\": \"Tes Nama Update\",\n            \"imageUrl\": \"https://res.cloudinary.com/dqjmsjig8/image/upload/v1699517280/cohort/kudanilterbang.jpg\",\n            \"adminId\": \"617a51c4-1e58-4801-b6b1-62a92057b45f\",\n            \"variants\": null,\n            \"createdAt\": \"2023-11-09T15:08:01.304+07:00\",\n            \"updatedAt\": \"2023-11-09T15:11:30.702+07:00\"\n        }\n    ],\n    \"status\": 200,\n    \"message\": \"success updated product data\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{URL}}/products/:id",
+              "host": ["{{URL}}"],
+              "path": ["products", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "dc2e0877-7278-4cd5-b0c6-6653b366aa20"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{URL}}/products/:id",
+                  "host": ["{{URL}}"],
+                  "path": ["products", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "dc2e0877-7278-4cd5-b0c6-6653b366aa20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 09 Nov 2023 08:12:13 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "47"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": 200,\n    \"message\": \"success deleted data\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "RAILWAY",
+      "value": "https://go-product-variant-production.up.railway.app",
+      "type": "string"
+    },
+    {
+      "key": "URL",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "AUTH",
+      "value": ""
+    }
+  ]
+}
