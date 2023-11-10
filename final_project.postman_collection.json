@@ -35,8 +35,8 @@
               ]
             },
             "url": {
-              "raw": "{{URL}}/auth/register",
-              "host": ["{{URL}}"],
+              "raw": "{{RAILWAY}}/auth/register",
+              "host": ["{{RAILWAY}}"],
               "path": ["auth", "register"]
             }
           },
@@ -127,8 +127,8 @@
               ]
             },
             "url": {
-              "raw": "{{URL}}/auth/login",
-              "host": ["{{URL}}"],
+              "raw": "{{RAILWAY}}/auth/login",
+              "host": ["{{RAILWAY}}"],
               "path": ["auth", "login"]
             }
           },
@@ -195,8 +195,8 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{URL}}/products/variants?page=1&size=2&search=mac",
-                  "host": ["{{URL}}"],
+                  "raw": "{{RAILWAY}}/products/variants?page=1&size=2&search=mac",
+                  "host": ["{{RAILWAY}}"],
                   "path": ["products", "variants"],
                   "query": [
                     {
@@ -268,13 +268,13 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{URL}}/products/variants/:uuid",
-                  "host": ["{{URL}}"],
+                  "raw": "{{RAILWAY}}/products/variants/:uuid",
+                  "host": ["{{RAILWAY}}"],
                   "path": ["products", "variants", ":uuid"],
                   "variable": [
                     {
                       "key": "uuid",
-                      "value": "29251ad3-46be-4628-bd6a-bd5f52e24067",
+                      "value": "a378cd2e-ae71-4acb-8a56-1a82083e6cbd",
                       "description": "uuid of variant"
                     }
                   ]
@@ -351,15 +351,15 @@
                     },
                     {
                       "key": "productId",
-                      "value": "73fbd47e-95ac-4ef3-8b3c-a82acbbf113a",
+                      "value": "592a4609-c7b6-4c66-883d-f0c0ed00c4ca",
                       "description": "uuid of product",
                       "type": "text"
                     }
                   ]
                 },
                 "url": {
-                  "raw": "{{URL}}/products/variants",
-                  "host": ["{{URL}}"],
+                  "raw": "{{RAILWAY}}/products/variants",
+                  "host": ["{{RAILWAY}}"],
                   "path": ["products", "variants"]
                 }
               },
@@ -451,13 +451,13 @@
                   ]
                 },
                 "url": {
-                  "raw": "{{URL}}/products/variants/:uuid",
-                  "host": ["{{URL}}"],
+                  "raw": "{{RAILWAY}}/products/variants/:uuid",
+                  "host": ["{{RAILWAY}}"],
                   "path": ["products", "variants", ":uuid"],
                   "variable": [
                     {
                       "key": "uuid",
-                      "value": "d4636f52-4f09-4051-bf8b-4df6dc46c553",
+                      "value": "f7ed41ec-3699-4489-bbd5-7fe0ca533c1b",
                       "description": "uuid of variant"
                     }
                   ]
@@ -537,13 +537,13 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "{{URL}}/products/variants/:uuid",
-                  "host": ["{{URL}}"],
+                  "raw": "{{RAILWAY}}/products/variants/:uuid",
+                  "host": ["{{RAILWAY}}"],
                   "path": ["products", "variants", ":uuid"],
                   "variable": [
                     {
                       "key": "uuid",
-                      "value": "522233f6-0086-43f8-b925-950befb61857",
+                      "value": "f7ed41ec-3699-4489-bbd5-7fe0ca533c1b",
                       "description": "uuid of variant"
                     }
                   ]
@@ -601,8 +601,8 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{URL}}/products?page=1&size=1&search=3",
-              "host": ["{{URL}}"],
+              "raw": "{{RAILWAY}}/products?page=1&size=1&search=3",
+              "host": ["{{RAILWAY}}"],
               "path": ["products"],
               "query": [
                 {
@@ -676,8 +676,8 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{URL}}/products/:id",
-              "host": ["{{URL}}"],
+              "raw": "{{RAILWAY}}/products/:id",
+              "host": ["{{RAILWAY}}"],
               "path": ["products", ":id"],
               "variable": [
                 {
@@ -753,13 +753,13 @@
                 {
                   "key": "file",
                   "type": "file",
-                  "src": []
+                  "src": "/C:/Users/Irfan Fakri Ardian/Downloads/Chum_Bucket_Supreme_68.jpeg"
                 }
               ]
             },
             "url": {
-              "raw": "{{URL}}/products",
-              "host": ["{{URL}}"],
+              "raw": "{{RAILWAY}}/products",
+              "host": ["{{RAILWAY}}"],
               "path": ["products"]
             }
           },
@@ -844,8 +844,8 @@
               ]
             },
             "url": {
-              "raw": "{{URL}}/products/:id",
-              "host": ["{{URL}}"],
+              "raw": "{{RAILWAY}}/products/:id",
+              "host": ["{{RAILWAY}}"],
               "path": ["products", ":id"],
               "variable": [
                 {
@@ -927,8 +927,8 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{URL}}/products/:id",
-              "host": ["{{URL}}"],
+              "raw": "{{RAILWAY}}/products/:id",
+              "host": ["{{RAILWAY}}"],
               "path": ["products", ":id"],
               "variable": [
                 {
@@ -1000,7 +1000,7 @@
   "variable": [
     {
       "key": "RAILWAY",
-      "value": "https://go-product-variant-production.up.railway.app",
+      "value": "https://golang-cohort2-fakriardian.up.railway.app",
       "type": "string"
     },
     {
