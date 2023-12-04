@@ -135,7 +135,7 @@ func (r *repository) Count(filter dtos.Filter) (*int64, error) {
 
 	tx := r.db.Model(&models.Product{})
 	if filter.Search != "" {
-		tx = tx.Where("name LIKE ?", filter.Search)
+		tx = tx.Where("name LIKE ?", "%"+filter.Search+"%")
 	}
 	tx = tx.Count(&total)
 

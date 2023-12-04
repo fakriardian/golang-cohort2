@@ -130,7 +130,7 @@ func (r *varinatRepository) Count(filter dtos.Filter) (*int64, error) {
 
 	tx := r.db.Model(&models.Variant{})
 	if filter.Search != "" {
-		tx = tx.Where("name LIKE ?", filter.Search)
+		tx = tx.Where("name LIKE ?", "%"+filter.Search+"%")
 	}
 	tx = tx.Count(&total)
 
